@@ -5,9 +5,9 @@
 
     <ul class="grid">
         <li class="item" v-for="(item, i) in items" :key="i">
-            <nuxt-link :to="`/${ item.slug }`">
+            <nuxt-link class="link" :to="`/examples/${ item.slug }`">
                 <span class="title" v-html="startCase(item.slug)" />
-                <component :is="item.component" />
+                <component :is="item.component || item.slug" />
             </nuxt-link>
         </li>
     </ul>
@@ -22,7 +22,7 @@ import _ from 'lodash'
 export default {
     data() {
         return {
-            items: [{ slug: 'purple-tower', component: 'purple-tower' }]
+            items: [{ slug: 'breathing-tower' }]
         }
     },
     methods: {
@@ -35,13 +35,8 @@ export default {
 .three-examples {
     font-family: $font-family;
 
-    button {
-        -webkit-appearance: none;
-        appearance: none;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-
+    .link {
+        text-align: center;
         &:hover,
         &:focus {
             .title {

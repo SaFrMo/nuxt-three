@@ -1,4 +1,5 @@
 const pkg = require('./package')
+const webpack = require('webpack')
 
 module.exports = {
     mode: 'universal',
@@ -57,6 +58,16 @@ module.exports = {
         /*
     ** You can extend webpack config here
     */
-        extend(config, ctx) {}
+        extend(config, ctx) {
+            config.module.rules.push({
+                test: /\.md$/,
+                use: [{ loader: 'html-loader' }, { loader: 'markdown-loader' }]
+            })
+            config.plugins.push(
+                new webpack.ProvidePlugin({
+                    _get: ['lodash/get']
+                })
+            )
+        }
     }
 }

@@ -19,7 +19,20 @@ $font-family: 'Montserrat';
 }
 
 // base styles
+body {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    margin: 0;
+}
 a {
+    color: $black;
+}
+button {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
 .three-view {
     @include fill;
