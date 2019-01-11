@@ -18,6 +18,7 @@
     "node-sass": "^4.11.0",
     "nuxt": "^2.0.0",
     "nuxt-sass-resources-loader": "^2.0.5",
+    "popmotion": "^8.5.5",
     "sass-loader": "^7.1.0",
     "vue-three-wrap": "^1.1.0"
   },

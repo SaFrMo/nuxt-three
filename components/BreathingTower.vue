@@ -3,16 +3,12 @@
 </template>
 
 <script>
-import VueThreeWrap from 'vue-three-wrap'
 import * as THREE from 'three'
 import { transform } from 'popmotion'
 
 const ref = {}
 
 export default {
-    components: {
-        'vue-three-wrap': VueThreeWrap
-    },
     methods: {
         start({ scene, camera }) {
             // add light

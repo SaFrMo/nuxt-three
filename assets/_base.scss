@@ -18,6 +18,21 @@ $font-family: 'Montserrat';
     left: 0;
 }
 
+@mixin old-button {
+    border: 1px solid black;
+    display: block;
+    box-shadow: 2px 2px black;
+    outline: none;
+    background: $white;
+    padding: 0 5px;
+
+    &.pressed {
+        transform: translate(1px, 1px);
+        box-shadow: 1px 1px black;
+        background: #ddd;
+    }
+}
+
 // base styles
 body {
     -webkit-font-smoothing: antialiased;
@@ -33,6 +48,8 @@ button {
     background: transparent;
     border: none;
     cursor: pointer;
+    font-size: inherit;
+    outline: none;
 }
 .three-view {
     @include fill;

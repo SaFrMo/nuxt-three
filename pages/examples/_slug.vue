@@ -2,10 +2,16 @@
 
     <main class="single-example">
 
-        <component :is="$route.params.slug"/>
+        <component :is="$route.params.slug" :show-controls="!articleVisible"/>
 
-        <div class="content-wrap">
-            <nuxt-link class="link-home" to="/">Home</nuxt-link>
+        <div :class="['content-wrap', { hidden: !articleVisible }]" ref="article">
+            <div class="nav">
+                <nuxt-link class="link-home" to="/">Home</nuxt-link>
+
+                <button @click="toggleVisible">
+                    {{ articleVisible ? 'hide' : 'show' }} description
+                </button>
+            </div>
 
             <article class="article" v-html="cmpContent"/>
         </div>
@@ -15,6 +21,10 @@
 </template>
 
 <script>
+import { spring, styler } from 'popmotion'
+
+let inProgress = null
+
 export default {
     fetch({ params, store, redirect }) {
         try {
@@ -24,12 +34,49 @@ export default {
             redirect('/404')
         }
     },
+    data() {
+        return {
+            articleVisible: true,
+            articleStyler: null
+        }
+    },
     computed: {
         cmpContent() {
             return _get(
                 this,
                 `$store.state.examples[${this.$route.params.slug}]`
             )
+        }
+    },
+    methods: {
+        toggleVisible() {
+            // toggle visibility
+            this.articleVisible = !this.articleVisible
+
+            // build a styler
+            this.articleStyler = styler(this.$refs.article)
+
+            // stop in-progress motion
+            if (inProgress) inProgress.stop()
+
+            // save top position to make sure it's animatable by popmotion
+            const y = this.$refs.article.getBoundingClientRect().top
+            this.articleStyler.set('y', y)
+
+            // create and start tween
+            inProgress = spring({
+                from: this.articleStyler.get('y'),
+                to: this.articleVisible ? 0 : window.innerHeight - 160,
+                stiffness: 300,
+                damping: 20
+            }).start({
+                update: this.articleStyler.set('y'),
+                complete: () => {
+                    if (!this.articleVisible) {
+                        this.articleStyler.set('y', 'calc(100% - 80px)')
+                    }
+                }
+            })
         }
     }
 }
@@ -61,6 +108,10 @@ $gap: 40px;
         max-width: 1200px;
         margin: auto;
 
+        .nav {
+            display: flex;
+            justify-content: space-between;
+        }
         .content {
             overflow-y: auto;
             overflow-x: hidden;

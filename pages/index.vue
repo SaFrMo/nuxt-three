@@ -5,10 +5,9 @@
 
     <ul class="grid">
         <li class="item" v-for="(item, i) in items" :key="i">
-            <nuxt-link class="link" :to="`/examples/${ item.slug }`">
-                <span class="title" v-html="startCase(item.slug)" />
-                <component :is="item.component || item.slug" />
-            </nuxt-link>
+            <span class="title" v-html="startCase(item)" />
+            <component :is="item" />
+            <nuxt-link class="link" :to="`/examples/${ item }`">…</nuxt-link>
         </li>
     </ul>
 </main>
@@ -22,7 +21,7 @@ import _ from 'lodash'
 export default {
     data() {
         return {
-            items: [{ slug: 'breathing-tower' }]
+            items: ['breathing-tower', 'lighting-ref']
         }
     },
     methods: {
@@ -75,10 +74,32 @@ export default {
                 background: $white;
                 font-size: 16px;
                 padding: 10px 5px;
+                display: block;
+                text-align: center;
             }
             .wrap {
                 position: relative;
                 flex: 1;
+            }
+            .three-view,
+            canvas {
+                pointer-events: none;
+            }
+            .link {
+                position: absolute;
+                bottom: 5px;
+                left: 3px;
+                text-decoration: none;
+                opacity: 0;
+
+                @include old-button;
+
+                &:focus {
+                    opacity: 1;
+                }
+            }
+            &:hover .link {
+                opacity: 1;
             }
         }
     }
