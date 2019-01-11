@@ -1,66 +1,91 @@
 <template>
-  <section class="container">
-    <div>
-      <logo/>
-      <h1 class="title">
-        nuxt-three
-      </h1>
-      <h2 class="subtitle">
-        Examples of three-js in Nuxt
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
-    </div>
-  </section>
+
+    <main class="three-examples">
+    <h2>Examples</h2>
+
+    <ul class="grid">
+        <li class="item" v-for="(item, i) in items" :key="i">
+            <nuxt-link :to="`/${ item.slug }`">
+                <span class="title" v-html="startCase(item.slug)" />
+                <component :is="item.component" />
+            </nuxt-link>
+        </li>
+    </ul>
+</main>
+
+
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import _ from 'lodash'
 
 export default {
-  components: {
-    Logo
-  }
+    data() {
+        return {
+            items: [{ slug: 'purple-tower', component: 'purple-tower' }]
+        }
+    },
+    methods: {
+        startCase: _.startCase
+    }
 }
 </script>
 
-<style>
+<style lang="scss">
+.three-examples {
+    font-family: $font-family;
 
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+    button {
+        -webkit-appearance: none;
+        appearance: none;
+        background: transparent;
+        border: none;
+        cursor: pointer;
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
+        &:hover,
+        &:focus {
+            .title {
+                z-index: 5;
+            }
+        }
+    }
+    .grid {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
+        .item {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            border: 1px solid $black;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin: 20px;
 
-.links {
-  padding-top: 15px;
+            .title {
+                border-bottom: 1px solid $black;
+                padding: 8px 5px 10px;
+                font-family: $header-font;
+                text-transform: lowercase;
+                font-weight: 700;
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                background: $white;
+                font-size: 16px;
+                padding: 10px 5px;
+            }
+            .wrap {
+                position: relative;
+                flex: 1;
+            }
+        }
+    }
 }
 </style>

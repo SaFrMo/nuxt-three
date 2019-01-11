@@ -1,0 +1,26 @@
+$color1: #071e22;
+$color2: #1d7874;
+$color3: #679289;
+$color4: #f4c095;
+$color5: #ee2e31;
+$white: #fff;
+$black: #030303;
+
+$header-font: 'Major Mono Display';
+$font-family: 'Montserrat';
+
+// mixins
+@mixin fill($position: absolute) {
+    position: $position;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+// base styles
+a {
+}
+.three-view {
+    @include fill;
+}
