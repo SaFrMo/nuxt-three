@@ -21,7 +21,17 @@ import _ from 'lodash'
 export default {
     data() {
         return {
-            items: ['breathing-tower', 'lighting-ref']
+            items: [
+                'breathing-tower',
+                'lighting-ref',
+                'cartoon-pipe',
+                'box-of-boxes',
+                'rotating-lights',
+                'trailing-pyramid',
+                'ring-of-boxes',
+                'wandering-spheres',
+                'shape-clicker'
+            ]
         }
     },
     methods: {

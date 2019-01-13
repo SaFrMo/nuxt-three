@@ -1,7 +1,5 @@
-the breathing tower
+# breathing tower
 
-test!
+This was the first test for the `vue-three-wrap` component. The big takeaways from this one were:
 
-## Another Test
-
-This.
+-   the HSL color wheel is excellent for cycling through colors!

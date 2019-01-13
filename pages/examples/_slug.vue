@@ -68,7 +68,7 @@ export default {
                 from: this.articleStyler.get('y'),
                 to: this.articleVisible ? 0 : window.innerHeight - 160,
                 stiffness: 300,
-                damping: 20
+                damping: 25
             }).start({
                 update: this.articleStyler.set('y'),
                 complete: () => {
