@@ -110,8 +110,23 @@ export default {
             const path = new CustomSinCurve(10)
             const geo = new THREE.TubeGeometry(path, 64, 4, 8, false)
             ref.pipe = new THREE.Mesh(geo, shaderMat)
-            // ref.pipe.rotateZ(Math.PI)
             scene.add(ref.pipe)
+
+            // screen
+            const plane = new THREE.PlaneGeometry(50, 50)
+            const mat = new THREE.MeshBasicMaterial({
+                // color: 0xff0000,
+                side: THREE.DoubleSide
+            })
+            const lPlane = new THREE.Mesh(plane, mat)
+            lPlane.position.x = -53
+            lPlane.position.z = 20
+            const rPlane = new THREE.Mesh(plane, mat)
+            rPlane.position.x = 53
+            rPlane.position.z = 20
+
+            scene.add(lPlane)
+            scene.add(rPlane)
         },
         update() {
             ref.pipe.material.uniforms.time.value = Date.now() - mountTime
