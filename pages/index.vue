@@ -7,7 +7,7 @@
         <li class="item" v-for="(item, i) in items" :key="i">
             <span class="title" v-html="startCase(item)" />
             <component :is="item" />
-            <nuxt-link class="link" :to="`/examples/${ item }`">…</nuxt-link>
+            <nuxt-link class="link" v-if="postExists(item)" :to="`/examples/${ item }`">…</nuxt-link>
         </li>
     </ul>
 </main>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import _ from 'lodash'
+import _startCase from 'lodash/startCase'
 
 export default {
     data() {
@@ -35,7 +35,17 @@ export default {
         }
     },
     methods: {
-        startCase: _.startCase
+        startCase: _startCase,
+        postExists(slug) {
+            // check if a blog post for the given example exists
+            try {
+                require(`~/content/examples/${slug}.md`)
+            } catch (err) {
+                return false
+            }
+
+            return true
+        }
     }
 }
 </script>
@@ -100,17 +110,17 @@ export default {
                 bottom: 5px;
                 left: 3px;
                 text-decoration: none;
-                opacity: 0;
+                // opacity: 0;
 
                 @include old-button;
 
-                &:focus {
-                    opacity: 1;
-                }
+                // &:focus {
+                //     opacity: 1;
+                // }
             }
-            &:hover .link {
-                opacity: 1;
-            }
+            // &:hover .link {
+            //     opacity: 1;
+            // }
         }
     }
 }

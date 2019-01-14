@@ -6,14 +6,16 @@
 
         <div :class="['content-wrap', { hidden: !articleVisible }]" ref="article">
             <div class="nav">
-                <nuxt-link class="link-home" to="/">Home</nuxt-link>
+                <nuxt-link class="link-home" to="/">home</nuxt-link>
 
-                <button @click="toggleVisible">
+                <h1 class="title" v-html="cmpTitle"/>
+
+                <button @click="toggleVisible" class="toggle-visible">
                     {{ articleVisible ? 'hide' : 'show' }} description
                 </button>
             </div>
 
-            <article class="article" v-html="cmpContent"/>
+            <article class="content" v-html="cmpContent"/>
         </div>
 
     </main>
@@ -22,6 +24,7 @@
 
 <script>
 import { spring, styler } from 'popmotion'
+import _startCase from 'lodash/startCase'
 
 let inProgress = null
 
@@ -41,6 +44,9 @@ export default {
         }
     },
     computed: {
+        cmpTitle() {
+            return _startCase(_get(this, '$route.params.slug', ''))
+        },
         cmpContent() {
             return _get(
                 this,
@@ -66,14 +72,14 @@ export default {
             // create and start tween
             inProgress = spring({
                 from: this.articleStyler.get('y'),
-                to: this.articleVisible ? 0 : window.innerHeight - 160,
-                stiffness: 300,
-                damping: 25
+                to: this.articleVisible ? 0 : window.innerHeight - 140,
+                stiffness: 200,
+                damping: 28
             }).start({
                 update: this.articleStyler.set('y'),
                 complete: () => {
                     if (!this.articleVisible) {
-                        this.articleStyler.set('y', 'calc(100% - 80px)')
+                        this.articleStyler.set('y', 'calc(100% - 60px)')
                     }
                 }
             })
@@ -109,13 +115,47 @@ $gap: 40px;
         margin: auto;
 
         .nav {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            .title {
+                text-align: center;
+                text-transform: lowercase;
+                font-size: 18px;
+            }
+            .toggle-visible {
+                text-align: right;
+            }
         }
         .content {
             overflow-y: auto;
             overflow-x: hidden;
-            max-height: 100%;
+            max-height: calc(100% - 50px);
+            margin-top: 50px;
+
+            & > * {
+                margin: 20px auto;
+                max-width: 600px;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+            li {
+                margin-bottom: 20px;
+            }
+
+            // code examples
+            code {
+                background: $black;
+                display: inline-block;
+                color: $white;
+                padding: 20px;
+                margin: 20px auto;
+                border-radius: 15px;
+                max-width: 100%;
+                overflow-x: auto;
+            }
         }
     }
 }

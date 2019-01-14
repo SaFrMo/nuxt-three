@@ -29,7 +29,6 @@ export default {
                     color: rainbow(i)
                 })
                 const cube = new THREE.Mesh(geometry, material)
-                // cube.position.x = -8
                 cube.position.y = i - 10
                 ref.cubes.push(cube)
                 scene.add(cube)
