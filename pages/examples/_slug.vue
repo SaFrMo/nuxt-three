@@ -143,9 +143,12 @@ $gap: 40px;
                     margin-top: 0;
                 }
             }
-            & > video {
+            video,
+            img {
                 max-width: 100%;
                 height: auto;
+                display: block;
+                margin: 20px auto;
             }
             li {
                 margin-bottom: 20px;
