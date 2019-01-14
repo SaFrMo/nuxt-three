@@ -132,14 +132,20 @@ $gap: 40px;
             overflow-x: hidden;
             max-height: calc(100% - 50px);
             margin-top: 50px;
+            line-height: 2;
 
             & > * {
                 margin: 20px auto;
                 max-width: 600px;
+                display: block;
 
                 &:first-child {
                     margin-top: 0;
                 }
+            }
+            & > video {
+                max-width: 100%;
+                height: auto;
             }
             li {
                 margin-bottom: 20px;
