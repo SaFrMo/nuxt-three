@@ -100,7 +100,7 @@ Here's what I ended up with - note the switch from the 'tween' function to 'spri
 spring({
     from: 0,
     to: '120px',
-    stiffness: 80,
+    stiffness: 50,
     damping: 8
 }).start(traveler.set('x'))
 ```
@@ -111,3 +111,30 @@ And here's the result so far:
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 It's got one extra little overshoot/correction at the end, but I like how that looks that in our version!
+
+## the bouncer
+
+Since we've highlighted the extremes of the bounce animation already in the screenshot above, let's put those to good use by making the bounce a Popmotion [keyframe](https://popmotion.io/api/keyframes) animation!
+
+First, we'll assume that the animation in about 50 frames long, so we'll need to multiply each frame index by 2 to it as a percentage. Couple that with the Y offset and we've got a set of keyframe options that look like this:
+
+```
+values: [
+    { y: 0 }, // 0
+    { y: -40 }, // 0.36
+    { y: 0 }, // 0.52
+    { y: -15 }, // 0.64
+    { y: 0 }, // 0.74
+    { y: -6 }, // 0.84
+    { y: 0 } // 1
+],
+// take those times from above and set them here:
+times: [0, 0.36, 0.52, 0.64, 0.74, 0.84, 1],
+```
+
+That gives us the following:
+
+<p data-height="265" data-theme-id="light" data-slug-hash="QzoGYr" data-default-tab="result" data-user="SanderMoolin" data-pen-title="Single Bounce" class="codepen">See the Pen <a href="https://codepen.io/SanderMoolin/pen/QzoGYr/">Single Bounce</a> by Sander Moolin (<a href="https://codepen.io/SanderMoolin">@SanderMoolin</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+That's a good start! Let's include the squash and stretch in those keyframes.
