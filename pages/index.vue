@@ -1,16 +1,27 @@
 <template>
 
     <main class="three-examples">
-    <h2>Examples</h2>
 
-    <ul class="grid">
-        <li class="item" v-for="(item, i) in items" :key="i">
-            <span class="title" v-html="startCase(item)" />
-            <component :is="item" />
-            <nuxt-link class="link" v-if="postExists(item)" :to="`/examples/${ item }`">…</nuxt-link>
-        </li>
-    </ul>
-</main>
+        <!-- examples of work -->
+        <h2 class="section-title">Examples</h2>
+        <ul class="grid">
+            <li class="item" v-for="(item, i) in items" :key="i">
+                <span class="title" v-html="startCase(item)" />
+                <component :is="item" />
+                <nuxt-link class="link" v-if="postExists(item)" :to="`/examples/${ item }`">…</nuxt-link>
+            </li>
+        </ul>
+
+        <!-- utilities -->
+        <h2 class="section-title">Utilities</h2>
+        <ul class="grid">
+            <li class="item">
+                <span class="title">Info Textures</span>
+
+                <nuxt-link class="link" to="/utilities/info-textures">...</nuxt-link>
+            </li>
+        </ul>
+    </main>
 
 
 </template>
@@ -62,6 +73,13 @@ export default {
                 z-index: 5;
             }
         }
+    }
+    .section-title {
+        font-family: $header-font;
+        text-align: center;
+        padding: 40px 20px 15px;
+        margin: 0 auto;
+        text-transform: lowercase;
     }
     .grid {
         list-style: none;
