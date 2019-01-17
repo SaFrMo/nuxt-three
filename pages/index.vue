@@ -1,8 +1,8 @@
 <template>
 
     <main class="three-examples">
-    <h2>Examples</h2>
 
+    <h2 class="section-title">Examples</h2>
     <ul class="grid">
         <li class="item" v-for="(item, i) in items" :key="i">
             <span class="title" v-html="startCase(item)" />
@@ -62,6 +62,13 @@ export default {
                 z-index: 5;
             }
         }
+    }
+    .section-title {
+        font-family: $header-font;
+        text-align: center;
+        padding: 40px 20px 15px;
+        margin: 0 auto;
+        text-transform: lowercase;
     }
     .grid {
         list-style: none;
