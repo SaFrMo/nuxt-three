@@ -30,7 +30,8 @@ export default {
                 'trailing-pyramid',
                 'ring-of-boxes',
                 'wandering-spheres',
-                'shape-clicker'
+                'shape-clicker',
+                'standing-stones'
             ]
         }
     },
