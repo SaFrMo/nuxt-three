@@ -3,6 +3,10 @@
     <main class="three-examples">
 
     <h2 class="section-title">Examples</h2>
+
+    <p class="info">click <span class="sample-link">…</span> for more info</p>
+    <p class="info"><a href="https://github.com/SaFrMo/nuxt-three">source for this site</a></p>
+
     <ul class="grid">
         <li class="item" v-for="(item, i) in items" :key="i">
             <span class="title" v-html="startCase(item)" />
@@ -70,6 +74,15 @@ export default {
         padding: 40px 20px 15px;
         margin: 0 auto;
         text-transform: lowercase;
+    }
+    .info {
+        text-align: center;
+
+        .sample-link {
+            @include old-button(inline-block);
+            position: relative;
+            bottom: 3px;
+        }
     }
     .grid {
         list-style: none;

@@ -132,6 +132,7 @@ $gap: 40px;
             overflow-x: hidden;
             max-height: calc(100% - 50px);
             margin-top: 50px;
+            line-height: 1.4;
 
             & > * {
                 margin: 20px auto;
@@ -155,6 +156,14 @@ $gap: 40px;
                 border-radius: 15px;
                 max-width: 100%;
                 overflow-x: auto;
+            }
+
+            p > code {
+                padding: 2px 5px;
+                border-radius: 5px;
+                margin: 0;
+                position: relative;
+                top: 5px;
             }
         }
     }
