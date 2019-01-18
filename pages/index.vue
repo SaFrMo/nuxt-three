@@ -32,6 +32,7 @@ export default {
                 'box-of-boxes',
                 'rotating-lights',
                 'trailing-pyramid',
+                'spinning-wheel',
                 'ring-of-boxes',
                 'wandering-spheres',
                 'shape-clicker',
