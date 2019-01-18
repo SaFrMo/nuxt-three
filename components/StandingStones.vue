@@ -1,6 +1,6 @@
 <template>
-    <vue-three-wrap :start="start" renderType="css" :update="update">
-        <h2>I'm a title</h2><p>I'm a paragraph</p>
+    <vue-three-wrap :start="start" renderType="css" class="css">
+        <p class="stone" v-for="i in 20"><span>{{ i }}</span></p>
     </vue-three-wrap>
 </template>
 
@@ -12,23 +12,33 @@ const ref = {}
 export default {
     methods: {
         start({ scene, camera, renderer, elements, CSS }) {
-            ref.h2 = new CSS.CSS3DObject(elements[0])
-            ref.p = new CSS.CSS3DObject(elements[1])
+            ref.objects = elements.map(e => new CSS.CSS3DObject(e))
+            ref.objects.forEach((o, i) => {
+                if (o === undefined) return
+                o.position.set(0, 0, i * -100)
+                scene.add(o)
+            })
 
-            ref.h2.position.set(20, 20, 0)
-            ref.h2.lookAt(new THREE.Vector3(0, 20, 20))
-
-            ref.p.position.set(-20, -20, 0)
-            ref.p.lookAt(new THREE.Vector3(0, 0, 20))
-            camera.position.z = 150
-
-            scene.add(ref.h2)
-            scene.add(ref.p)
-            renderer.render(scene, camera)
-        },
-        update() {
-            // ref.h2.rotation.z += 0.01
+            camera.position.set(100, 100, 150)
+            camera.lookAt(new THREE.Vector3(0, 100, -250))
         }
     }
 }
 </script>
+
+<style lang="scss">
+.vue-three-wrap.css {
+    .stone {
+        background: tomato;
+        width: 100px;
+        height: 150px;
+        transform-origin: center bottom;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        text-align: center;
+    }
+}
+</style>

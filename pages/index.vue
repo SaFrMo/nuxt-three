@@ -109,7 +109,7 @@ export default {
                 position: relative;
                 flex: 1;
             }
-            .three-view,
+            .vue-three-wrap,
             canvas {
                 pointer-events: none;
             }

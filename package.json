@@ -21,7 +21,7 @@
     "popmotion": "^8.5.5",
     "sass-loader": "^7.1.0",
     "three": "^0.99.0",
-    "vue-three-wrap": "^1.1.6"
+    "vue-three-wrap": "^1.2.1"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
