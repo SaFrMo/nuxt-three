@@ -6,15 +6,14 @@
 
 <script>
 import * as THREE from 'three'
-import { CSS3DObject } from '~/assets/css3d'
 
 const ref = {}
 
 export default {
     methods: {
-        start({ scene, camera, renderer, elements }) {
-            ref.h2 = new CSS3DObject(elements[0])
-            ref.p = new CSS3DObject(elements[1])
+        start({ scene, camera, renderer, elements, CSS }) {
+            ref.h2 = new CSS.CSS3DObject(elements[0])
+            ref.p = new CSS.CSS3DObject(elements[1])
 
             ref.h2.position.set(20, 20, 0)
             ref.h2.lookAt(new THREE.Vector3(0, 20, 20))
@@ -23,7 +22,7 @@ export default {
             ref.p.lookAt(new THREE.Vector3(0, 0, 20))
             camera.position.z = 150
 
-            // scene.add(ref.h2)
+            scene.add(ref.h2)
             scene.add(ref.p)
             renderer.render(scene, camera)
         },
