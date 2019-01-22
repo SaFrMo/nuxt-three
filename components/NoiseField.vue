@@ -1,5 +1,5 @@
 <template>
-    <vue-three-wrap-dev
+    <vue-three-wrap
         camera-type="orthographic"
         fov="10"
         :start="start"
@@ -22,7 +22,7 @@
             </div>
         </div>
 
-    </vue-three-wrap-dev>
+    </vue-three-wrap>
 </template>
 
 <script>
