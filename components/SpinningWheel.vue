@@ -5,11 +5,11 @@
             v-for="(entry, i) in entries"
             :key="i">
 
-            <button @click="index--">↑</button>
+            <button @click="index++">↑</button>
 
             <p>{{ entry }}</p>
 
-            <button @click="index++">↓</button>
+            <button @click="index--">↓</button>
 
         </div>
     </vue-three-wrap>
