@@ -9,7 +9,7 @@
 <script>
 import * as THREE from 'three'
 import { transform } from 'popmotion'
-const Noise = require('noisejs')
+import Noise from 'noisejs'
 const { blendColor, interpolate } = transform
 
 // prep colors
@@ -48,6 +48,7 @@ class NoiseCell {
             )
         )
         this.cube.material.color = new THREE.Color(blend(noiseVal))
+        // ensure we don't go below 1.5
         this.cube.scale.y = noiseVal * maxHeight + 1.5
     }
 }
