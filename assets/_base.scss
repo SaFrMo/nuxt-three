@@ -54,3 +54,6 @@ button {
 .vue-three-wrap {
     @include fill;
 }
+
+// breakpoints
+$mobile: 'max-width: 750px';

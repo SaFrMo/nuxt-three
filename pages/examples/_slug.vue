@@ -1,6 +1,6 @@
 <template>
 
-    <main class="single-example">
+    <main :class="['single-example', { 'article-hidden': !articleVisible }]">
 
         <component :is="$route.params.slug" :show-controls="!articleVisible"/>
 
@@ -90,10 +90,19 @@ export default {
 
 <style lang="scss">
 $gap: 40px;
+$mobile-gap: 20px;
 
 .single-example {
     overflow: hidden;
     @include fill(fixed);
+
+    .controls-wrap {
+        transition: opacity 0.3s;
+        position: absolute;
+    }
+    &:not(.article-hidden) .controls-wrap {
+        opacity: 0;
+    }
 
     .home-link {
         position: absolute;
@@ -113,6 +122,7 @@ $gap: 40px;
         border-radius: 15px;
         max-width: 1200px;
         margin: auto;
+        overflow-y: auto;
 
         .nav {
             display: grid;
@@ -169,6 +179,37 @@ $gap: 40px;
                 position: relative;
                 top: 5px;
                 width: initial;
+            }
+        }
+    }
+}
+
+@media (#{ $mobile }) {
+    .single-example {
+        .content-wrap {
+            right: $mobile-gap;
+            left: $mobile-gap;
+            padding: 20px 20px;
+            overflow-y: hidden;
+
+            .nav {
+                grid-template-columns: 100%;
+
+                .title,
+                .toggle-visible {
+                    text-align: right;
+                    padding: 0;
+                }
+            }
+            .content {
+                -webkit-overflow-scrolling: touch;
+                margin-top: 22px;
+                padding-bottom: 20px;
+
+                ul,
+                ol {
+                    padding: 0;
+                }
             }
         }
     }
