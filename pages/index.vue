@@ -36,7 +36,8 @@ export default {
                 'ring-of-boxes',
                 'wandering-spheres',
                 'shape-clicker',
-                'domino-row'
+                'domino-row',
+                'noise-field'
             ]
         }
     },
