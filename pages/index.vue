@@ -95,8 +95,8 @@ export default {
         justify-content: center;
 
         .item {
-            width: 200px;
-            height: 200px;
+            width: 250px;
+            height: 250px;
             position: relative;
             border: 1px solid $black;
             display: flex;
