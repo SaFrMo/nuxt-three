@@ -71,7 +71,7 @@ export default {
 
             // create and start tween
             inProgress = spring({
-                from: this.articleStyler.get('y'),
+                from: this.articleVisible ? window.innerHeight - 140 : 0,
                 to: this.articleVisible ? 0 : window.innerHeight - 140,
                 stiffness: 200,
                 damping: 28
@@ -158,12 +158,17 @@ $gap: 40px;
                 overflow-x: auto;
             }
 
+            pre > code {
+                width: 100%;
+            }
+
             p > code {
                 padding: 2px 5px;
                 border-radius: 5px;
                 margin: 0;
                 position: relative;
                 top: 5px;
+                width: initial;
             }
         }
     }

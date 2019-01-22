@@ -18,7 +18,6 @@
 <script>
 import * as THREE from 'three'
 import { transform, spring, stagger } from 'popmotion'
-//const OrbitControls = require('three-orbit-controls')(THREE)
 const { blendColor } = transform
 
 let inProgress = []
@@ -28,12 +27,6 @@ const ref = {}
 export default {
     data() {
         return {
-            offsetX: 0,
-            offsetY: 0,
-            noiseSpeed: {
-                x: 0.05,
-                y: 0.02
-            },
             show: false,
             color1: '#FF007F',
             color2: '#460026'
@@ -41,9 +34,9 @@ export default {
     },
     methods: {
         start({ scene, camera }) {
-            // place cube
-            const geo = new THREE.SphereGeometry(0.8)
-            const mat = new THREE.MeshLambertMaterial({ color: 0x050505 })
+            // place center sphere
+            const geo = new THREE.SphereGeometry(0.8, 30, 30)
+            const mat = new THREE.MeshLambertMaterial({ color: this.color2 })
             ref.sphere = new THREE.Mesh(geo, mat)
             scene.add(ref.sphere)
 
@@ -53,34 +46,39 @@ export default {
 
             // place camera
             camera.position.z = 10
-            camera.lookAt(new THREE.Vector3(0, 0, 0))
 
             // prep for sprites
             ref.sprites = new THREE.Group()
             const spriteCount = 10
 
-            // place sprites
+            // create sprites
             for (let i = 0; i < spriteCount; i++) {
+                // blend between  our two colors
                 const blend = blendColor(this.color1, this.color2)
+
+                // create a new sprite
                 const sprite = new THREE.Sprite(
                     new THREE.SpriteMaterial({
                         color: new THREE.Color(blend(i / (spriteCount - 1)))
                     })
                 )
 
+                // add to sprite group
                 ref.sprites.add(sprite)
             }
-            this.positionSprites()
-            scene.add(ref.sprites)
 
-            // controls
-            //new OrbitControls(camera)
+            // position sprites
+            this.positionSprites()
+
+            // add sprite group to scene
+            scene.add(ref.sprites)
         },
         update() {
             ref.sprites.rotation.y += 0.01
         },
         positionSprites() {
             const minDistance = 2.2
+            // this is misnamed - max distance will actually be maxDistance + minDistance
             const maxDistance = 3
 
             // stop current
@@ -88,10 +86,11 @@ export default {
                 inProgress.stop()
             }
 
-            // prep tweens
-            const tweens = []
+            // prep springs
+            const springs = []
 
             ref.sprites.children.forEach(sprite => {
+                // randomly create a new position
                 const newPos = {
                     x:
                         Math.random() * maxDistance +
@@ -103,7 +102,7 @@ export default {
                         Math.random() * maxDistance +
                         minDistance * (Math.random() > 0.5 ? -1 : 1)
                 }
-                tweens.push(
+                springs.push(
                     spring({
                         from: {
                             x: sprite.position.x,
@@ -116,8 +115,8 @@ export default {
                 )
             })
 
-            // start tweens
-            inProgress = stagger(tweens, 30).start(values =>
+            // start springs
+            inProgress = stagger(springs, 30).start(values =>
                 values.forEach((v = -1, i) => {
                     const current =
                         v == -1 ? ref.sprites.children[i].position : v
