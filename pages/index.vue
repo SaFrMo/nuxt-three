@@ -37,7 +37,8 @@ export default {
                 'wandering-spheres',
                 'shape-clicker',
                 'domino-row',
-                'noise-field'
+                'noise-field',
+                'sprite-orbit'
             ]
         }
     },
