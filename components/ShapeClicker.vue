@@ -75,9 +75,12 @@ export default {
                 y: camera.position.y,
                 z: camera.position.z
             }
+
+            // save camera
+            ref.camera = camera
         },
         onClick(evt) {
-            const camera = this.$refs.canvas._props.camera
+            const camera = ref.camera
 
             // update raycaster
             this.updateRaycaster(camera, {
