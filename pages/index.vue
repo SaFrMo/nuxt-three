@@ -144,6 +144,48 @@ export default {
             // &:hover .link {
             //     opacity: 1;
             // }
+
+            .controls-wrap {
+                position: absolute;
+                top: 37px;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                padding: 3px;
+                pointer-events: all;
+
+                button {
+                    @include old-button;
+                }
+
+                // controls
+                .controls {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 0;
+                    right: 3px;
+                    height: 100%;
+                    width: 60%;
+                    font-size: 14px;
+                    text-align: right;
+
+                    & > * {
+                        padding: 5px;
+                        background: rgba(white, 0.8);
+                    }
+
+                    .list {
+                        list-style: none;
+                        text-align: right;
+                    }
+                    .description {
+                        margin: 0 0 3px;
+                        text-align: right;
+                    }
+                }
+            }
         }
     }
 }

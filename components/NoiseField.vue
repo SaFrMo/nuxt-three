@@ -3,7 +3,26 @@
         camera-type="orthographic"
         fov="10"
         :start="start"
-        :update="update" />
+        :update="update"
+        class="noise-field" >
+
+        <div :class="['controls-wrap', { opened: show }]">
+            <button :class="[{ pressed: show }]" @click="show = !show">⚙️</button>
+
+            <div class="controls" v-if="show">
+                <p>
+                    <label for="color1">Low</label>
+                    <input type="color" v-model="color1" id="color1"/>
+                </p>
+
+                <p>
+                    <label for="color2">High</label>
+                    <input type="color" v-model="color2" id="color2"/>
+                </p>
+            </div>
+        </div>
+
+    </vue-three-wrap-dev>
 </template>
 
 <script>
@@ -12,10 +31,8 @@ import { transform } from 'popmotion'
 import Noise from 'noisejs'
 const { blendColor, interpolate } = transform
 
-// prep colors
-const color1 = '#E4D9FF'
-const color2 = '#1E2749'
-const blend = blendColor(color1, color2)
+// prep color interpolation
+let blend = val => val
 
 // prep noise interpolation
 const noiseInterpolate = interpolate([-1, 1], [0, 1])
@@ -61,8 +78,15 @@ export default {
             noiseSpeed: {
                 x: 0.05,
                 y: 0.02
-            }
+            },
+            show: false,
+            color1: '#E4D9FF',
+            color2: '#1E2749',
+            blend: null
         }
+    },
+    mounted() {
+        this.updateBlend()
     },
     methods: {
         start({ scene, camera }) {
@@ -111,7 +135,26 @@ export default {
 
             this.offsetX += this.noiseSpeed.x
             this.offsetY += this.noiseSpeed.y
+        },
+        updateBlend() {
+            blend = blendColor(this.color1, this.color2)
+        }
+    },
+    watch: {
+        color1(newVal) {
+            this.updateBlend()
+        },
+        color2(newVal) {
+            this.updateBlend()
         }
     }
 }
 </script>
+
+<style lang="scss">
+.grid .item .vue-three-wrap.noise-field {
+    .controls-wrap .controls {
+        justify-content: center;
+    }
+}
+</style>
