@@ -38,7 +38,8 @@ export default {
                 'shape-clicker',
                 'domino-row',
                 'noise-field',
-                'sprite-orbit'
+                'sprite-orbit',
+                'spline-example'
             ]
         }
     },
