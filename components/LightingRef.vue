@@ -3,7 +3,7 @@
         <vue-three-wrap :start="start" :update="update" />
 
         <div :class="['controls-wrap', { opened: show }]">
-            <button :class="[{ pressed: show }]" @click="show = !show">⚙️</button>
+            <button :class="[{ pressed: show }]" @click="show = !show"><span class="emoji">⚙️</span></button>
 
             <div class="controls" v-if="show">
                 <ul class="list">
