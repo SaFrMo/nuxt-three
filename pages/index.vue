@@ -173,7 +173,7 @@ export default {
         top: 0;
         right: 3px;
         height: 100%;
-        width: 60%;
+        width: 70%;
         max-width: 220px;
         font-size: 14px;
         text-align: right;

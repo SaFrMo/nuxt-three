@@ -1,5 +1,26 @@
 <template>
-    <vue-three-wrap :start="start" camera-type="ortho" fov="10" :update="update" />
+    <vue-three-wrap :start="start" camera-type="ortho" fov="10" :update="update" >
+
+        <div :class="['controls-wrap', { opened: show }]">
+            <button :class="[{ pressed: show }]" @click="show = !show"><span class="emoji">⚙️</span></button>
+
+            <div class="controls" v-if="show">
+                <ul class="list">
+                    <li v-for="(curve, i) in curves" :key="i">
+                        <input
+                            type="radio"
+                            :value="curve"
+                            :id="curve"
+                            v-model="curveType"
+                        />
+                        <label :for="curve" v-html="curve" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+    </vue-three-wrap>
 </template>
 
 <script>
@@ -20,6 +41,20 @@ export default {
                 new THREE.Vector3(-3, 0, 0),
                 new THREE.Vector3(3, 5, 0),
                 new THREE.Vector3(5, 5, 0)
+            ],
+            show: false,
+            curves: [
+                'CatmullRomCurve3',
+                // 'ArcCurve',
+                // 'CubicBezierCurve',
+                // 'EllipseCurve',
+                // 'LineCurve',
+                // 'QuadraticBezierCurve',
+                // 'SplineCurve',
+                // 'CubicBezierCurve3',
+                'LineCurve3',
+                // 'QuadraticBezierCurve3',
+                'None'
             ]
         }
     },
@@ -67,12 +102,25 @@ export default {
             const equation = THREE[this.curveType]
 
             // cancel if no curve
-            if (!equation) {
+            if (!equation && this.curveType != 'None') {
                 return
             }
 
             // build curve
-            const curve = new equation(this.points)
+            let curve = null
+            if (this.curveType == 'LineCurve3') {
+                curve = new equation(
+                    this.points[0],
+                    this.points[this.points.length - 1]
+                )
+            } else if (this.curveType == 'None') {
+                curve = new THREE.LineCurve3(
+                    new THREE.Vector3(this.startX, 0, 0),
+                    new THREE.Vector3(this.startX + this.lineWidth, 0, 0)
+                )
+            } else {
+                curve = new equation(this.points)
+            }
 
             // stop existing animation
             if (inProgress && inProgress.stop) {
@@ -91,12 +139,8 @@ export default {
                 // add spring to point
                 springs.push(
                     new spring({
-                        from: {
-                            x: child.position.x,
-                            y: child.position.y,
-                            z: child.position.z
-                        },
-                        to: { x: point.x, y: point.y, z: point.z }
+                        from: { y: child.position.y },
+                        to: { y: point.y }
                     })
                 )
             })
@@ -109,6 +153,11 @@ export default {
                     }
                 })
             )
+        }
+    },
+    watch: {
+        curveType() {
+            this.updatePoints()
         }
     }
 }
