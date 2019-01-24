@@ -39,7 +39,8 @@ export default {
                 'domino-row',
                 'noise-field',
                 'sprite-orbit',
-                'spline-example'
+                'spline-example',
+                'curve-ref'
             ]
         }
     },
