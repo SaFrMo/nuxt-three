@@ -127,10 +127,10 @@ export default {
                 position: relative;
                 flex: 1;
             }
-            .vue-three-wrap,
-            canvas {
-                pointer-events: none;
-            }
+            // .vue-three-wrap,
+            // canvas {
+            //     pointer-events: none;
+            // }
             .link {
                 position: absolute;
                 bottom: 5px;

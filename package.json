@@ -23,7 +23,7 @@
     "sass-loader": "^7.1.0",
     "three": "^0.99.0",
     "three-orbit-controls": "^82.1.0",
-    "vue-three-wrap": "^2.0.0"
+    "vue-three-wrap": "^3.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"

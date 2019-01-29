@@ -5,20 +5,20 @@
 <script>
 import VueThreeWrap from 'vue-three-wrap'
 import * as THREE from 'three'
-import raycaster from '~/assets/raycaster-mixin'
+import Raycaster from 'vue-three-wrap/extras/raycaster'
 import _get from 'lodash/get'
 
 const ref = {}
+let raycaster = null
 
 export default {
-    mixins: [raycaster],
-    data() {
-        return {
-            canvasSelector: '.pyramid-follow'
-        }
-    },
     methods: {
         start({ scene, camera }) {
+            raycaster = new Raycaster({
+                el: this.$el.querySelector('canvas'),
+                camera
+            })
+
             // add light
             ref.light = new THREE.PointLight(0xdddddd, 2)
             ref.light.castShadow = true
@@ -55,8 +55,8 @@ export default {
             camera.position.z = 10
         },
         update({ camera }) {
-            this.updateRaycaster(camera)
-            const intersectPlane = this.raycaster.intersectObject(ref.plane)
+            const intersectPlane = raycaster.intersectObject(ref.plane)
+            // console.log(intersectPlane)
             if (intersectPlane.length) {
                 const point = _get(intersectPlane, '[0].point', null)
                 ref.tetra.position.set(point.x, point.y + 1, point.z)
