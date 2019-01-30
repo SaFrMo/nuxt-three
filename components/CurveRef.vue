@@ -1,5 +1,5 @@
 <template>
-    <vue-three-wrap :start="start" camera-type="ortho" fov="10" :update="update" >
+    <vue-three-wrap class="curve-ref" :start="start" camera-type="ortho" fov="10" :update="update" >
 
         <div :class="['controls-wrap', { opened: show }]">
             <button :class="[{ pressed: show }]" @click="show = !show"><span class="emoji">⚙️</span></button>

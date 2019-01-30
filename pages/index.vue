@@ -40,7 +40,8 @@ export default {
                 'noise-field',
                 'sprite-orbit',
                 'spline-example',
-                'curve-ref'
+                'curve-ref',
+                'some-texturing'
             ]
         }
     },
@@ -98,8 +99,8 @@ export default {
         justify-content: center;
 
         .item {
-            width: 250px;
-            height: 250px;
+            width: 258px;
+            height: 258px;
             position: relative;
             border: 1px solid $black;
             display: flex;
