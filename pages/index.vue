@@ -26,6 +26,7 @@ export default {
     data() {
         return {
             items: [
+                'ocean-shader',
                 'breathing-tower',
                 'lighting-ref',
                 'cartoon-pipe',
