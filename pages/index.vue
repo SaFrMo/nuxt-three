@@ -49,7 +49,8 @@ export default {
                 'noise-field',
                 'sprite-orbit',
                 'spline-example',
-                'curve-ref'
+                'curve-ref',
+                'camera-on-rails'
             ],
             phenomenonItems: ['turning-helix']
         }

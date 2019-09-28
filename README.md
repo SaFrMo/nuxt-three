@@ -2,9 +2,11 @@
 
 > Examples of three-js in Nuxt
 
+Add any `.md` file to `content/examples` with the same name as an example to create a blog post for it.
+
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ npm install
 
