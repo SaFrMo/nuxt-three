@@ -15,3 +15,7 @@ _.forEach(components.keys(), fileName => {
 // register vue-three-wrap
 import VueThreeWrap from 'vue-three-wrap'
 Vue.component('vue-three-wrap', VueThreeWrap)
+
+// register full-canvas
+// import FullCanvas from '@fuzzco/full-canvas'
+// Vue.component('full-canvas', FullCanvas)

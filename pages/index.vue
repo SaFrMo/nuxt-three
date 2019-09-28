@@ -14,6 +14,15 @@
             <nuxt-link class="link" v-if="postExists(item)" :to="`/examples/${ item }`">…</nuxt-link>
         </li>
     </ul>
+
+    <h2 class="section-title"><a href="https://github.com/vaneenige/phenomenon" target="_blank">Phenomenon.js</a> examples</h2>
+    <ul class="grid">
+        <li class="item" v-for="(item, i) in phenomenonItems" :key="i">
+            <span class="title" v-html="startCase(item)" />
+            <component :is="item" />
+            <nuxt-link class="link" v-if="postExists(item)" :to="`/examples/${ item }`">…</nuxt-link>
+        </li>
+    </ul>
 </main>
 
 
@@ -41,7 +50,8 @@ export default {
                 'sprite-orbit',
                 'spline-example',
                 'curve-ref'
-            ]
+            ],
+            phenomenonItems: ['turning-helix']
         }
     },
     methods: {
