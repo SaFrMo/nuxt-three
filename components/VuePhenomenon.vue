@@ -44,7 +44,7 @@ export default {
         })
 
         // done mounting phenomenon
-        this.$emit('instantiated', this.phenom)
+        this.$emit('initialized', this.phenom)
 
         this.refreshInstances()
     },
@@ -60,7 +60,6 @@ export default {
             }
 
             for (let instance of this.instances) {
-                console.log(instance)
                 // already added, ignore
                 if (this.addedKeys.includes(instance.key)) {
                     continue
@@ -73,11 +72,17 @@ export default {
                     get(instance, 'settings.fragment', null) ||
                     get(this.$slots, 'fragment[0].children[0].text', '')
 
-                this.phenom.add(instance.key, {
-                    vertex,
-                    fragment,
-                    ...instance.settings,
-                })
+                const args = [
+                    instance.key,
+                    {
+                        vertex,
+                        fragment,
+                        ...instance.settings,
+                    },
+                ]
+                this.phenom.add(...args)
+
+                this.$emit('added', args)
             }
         },
     },

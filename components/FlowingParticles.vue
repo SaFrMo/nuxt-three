@@ -1,18 +1,19 @@
 <template>
     <section class="flowing-particles">
-        <vue-phenomenon :options="phenomOptions" :instances="[{key: 'all'}]">
+        <vue-phenomenon :instances="[{key: 'cube', settings: cube}]">
             <!-- vert -->
             <template v-slot:vertex>
                 <script type="x-shader/vertex">
                     attribute vec3 aPosition;
+                    attribute vec3 aOffset;
                     
                     uniform mat4 uProjectionMatrix;
                     uniform mat4 uModelMatrix;
                     uniform mat4 uViewMatrix;
 
                     void main(){
-                        gl_Position = uProjectionMatrix * uModelMatrix * uViewMatrix * vec4(aPosition, 1.0);
-                        gl_PointSize = 50.;
+                        gl_Position = uProjectionMatrix * uModelMatrix * uViewMatrix * vec4(aPosition + aOffset, 1.0);
+                        gl_PointSize = 10.;
                     }
                 </script>
             </template>
@@ -35,13 +36,23 @@
 export default {
     data() {
         return {
-            phenomOptions: {
-                settings: {
-                    clearColor: [0, 0, 0, 1],
-                    debug: true,
-                },
+            radius: 1,
+            cube: {
+                multiplier: 50,
+                attributes: [
+                    {
+                        name: 'aOffset',
+                        data: (i, total) => [this.rand(), this.rand(), 0],
+                        size: 3,
+                    },
+                ],
             },
         }
+    },
+    methods: {
+        rand() {
+            return Math.random() * this.radius - this.radius / 2
+        },
     },
 }
 </script>
