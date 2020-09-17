@@ -133,6 +133,7 @@ export default {
                 padding: 10px 5px;
                 display: block;
                 text-align: center;
+                z-index: 5;
             }
             .wrap {
                 position: relative;
