@@ -50,9 +50,9 @@ export default {
                 'sprite-orbit',
                 'spline-example',
                 'curve-ref',
-                'camera-on-rails'
+                'camera-on-rails',
             ],
-            phenomenonItems: ['turning-helix']
+            phenomenonItems: ['turning-helix', 'flowing-particles'],
         }
     },
     methods: {
@@ -66,8 +66,8 @@ export default {
             }
 
             return true
-        }
-    }
+        },
+    },
 }
 </script>
 

@@ -12,19 +12,21 @@
   },
   "dependencies": {
     "@fuzzco/full-canvas": "^1.0.0",
+    "@nuxtjs/style-resources": "1.0.0",
     "cross-env": "^5.2.0",
     "html-loader": "^0.5.5",
     "lodash": "^4.17.11",
     "markdown-loader": "^5.0.0",
     "node-sass": "^4.11.0",
     "noisejs": "^2.1.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "2.14.5",
     "nuxt-sass-resources-loader": "^2.0.5",
     "phenomenon": "^1.6.0",
     "popmotion": "^8.5.5",
     "sass-loader": "^7.1.0",
     "three": "^0.99.0",
     "three-orbit-controls": "^82.1.0",
+    "vue": "2.6.12",
     "vue-three-wrap": "^3.2.4"
   },
   "devDependencies": {

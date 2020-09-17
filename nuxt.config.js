@@ -13,22 +13,26 @@ module.exports = {
             { charset: 'utf-8' },
             {
                 name: 'viewport',
-                content: 'width=device-width, initial-scale=1'
+                content: 'width=device-width, initial-scale=1',
             },
             {
                 hid: 'description',
                 name: 'description',
-                content: pkg.description
-            }
+                content: pkg.description,
+            },
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
             {
                 href:
                     'https://fonts.googleapis.com/css?family=Major+Mono+Display|Montserrat',
-                rel: 'stylesheet'
-            }
-        ]
+                rel: 'stylesheet',
+            },
+        ],
+    },
+
+    styleResources: {
+        scss: ['~/assets/_base.scss'],
     },
 
     /*
@@ -49,7 +53,7 @@ module.exports = {
     /*
   ** Nuxt.js modules
   */
-    modules: [['nuxt-sass-resources-loader', ['assets/_base.scss']]],
+    modules: ['@nuxtjs/style-resources'],
 
     /*
   ** Build configuration
@@ -61,13 +65,13 @@ module.exports = {
         extend(config, ctx) {
             config.module.rules.push({
                 test: /\.md$/,
-                use: [{ loader: 'html-loader' }, { loader: 'markdown-loader' }]
+                use: [{ loader: 'html-loader' }, { loader: 'markdown-loader' }],
             })
             config.plugins.push(
                 new webpack.ProvidePlugin({
-                    _get: ['lodash/get']
+                    _get: ['lodash/get'],
                 })
             )
-        }
-    }
+        },
+    },
 }
