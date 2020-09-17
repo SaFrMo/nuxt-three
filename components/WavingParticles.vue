@@ -10,10 +10,14 @@
                     uniform mat4 uProjectionMatrix;
                     uniform mat4 uModelMatrix;
                     uniform mat4 uViewMatrix;
+                    uniform float uTime;
+                    varying vec4 vColor;
 
                     void main(){
-                        gl_Position = uProjectionMatrix * uModelMatrix * uViewMatrix * vec4(aPosition + aOffset, 1.0);
-                        gl_PointSize = 10.;
+                        vec3 finalPos = aPosition + aOffset + vec3(0., 0., cos(aOffset.x + uTime) * 0.5 );
+                        gl_Position = uProjectionMatrix * uModelMatrix * uViewMatrix * vec4(finalPos, 1.0);
+                        gl_PointSize = 2.;
+                        vColor = mix(vec4(0., 0., 0., 1.), vec4(1.), 0.35 - finalPos.z);
                     }
                 </script>
             </template>
@@ -22,9 +26,10 @@
             <template v-slot:fragment>
                 <script type="x-shader/fragment">
                     precision highp float;
+                    varying vec4 vColor;
 
                     void main(){
-                        gl_FragColor = vec4(1., 0., 0., 1.0);
+                        gl_FragColor = vColor;
                     }
                 </script>
             </template>
@@ -33,19 +38,31 @@
 </template>
 
 <script>
+let lastTime = Date.now()
 export default {
     data() {
         return {
-            radius: 1,
+            radius: 3,
             cube: {
-                multiplier: 50,
+                multiplier: 5000,
                 attributes: [
                     {
                         name: 'aOffset',
-                        data: (i, total) => [this.rand(), this.rand(), 0],
+                        data: () => [this.rand(), this.rand(), 0],
                         size: 3,
                     },
                 ],
+                uniforms: {
+                    uTime: {
+                        value: 0.0,
+                        type: 'float',
+                    },
+                },
+                onRender: instance => {
+                    instance.uniforms.uTime.value +=
+                        (Date.now() - lastTime) / 500
+                    lastTime = Date.now()
+                },
             },
         }
     },
