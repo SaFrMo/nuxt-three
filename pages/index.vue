@@ -52,7 +52,11 @@ export default {
                 'curve-ref',
                 'camera-on-rails',
             ],
-            phenomenonItems: ['turning-helix', 'waving-particles'],
+            phenomenonItems: [
+                'turning-helix',
+                'waving-particles',
+                'disassembling-background',
+            ],
         }
     },
     methods: {
