@@ -11,7 +11,12 @@ export default {
     props: {
         width: { type: Number, default: 300 },
         height: { type: Number, default: 150 },
-        phenomenonOptions: { type: Object, default: () => {} },
+        options: { type: Object, default: () => {} },
+    },
+    data() {
+        return {
+            phenom: null,
+        }
     },
     async mounted() {
         if (!window) return
@@ -20,30 +25,23 @@ export default {
             window.Phenomenon = require('phenomenon').default
         }
 
-        await this.$nextTick()
+        const opts = this.options || {}
 
-        const { vertex, fragment, canvas } = this.$slots
-        console.log(canvas ? canvas : this.$refs.canvas)
-
-        new Phenomenon({
+        this.phenom = new Phenomenon({
             canvas: this.$refs.canvas,
-            ...this.phenomenonOptions,
+            ...opts,
 
             context: {
-                ...(this.phenomenonOptions.context || {}),
+                ...(opts.context || {}),
             },
 
             settings: {
-                ...(this.phenomenonOptions.settings || {}),
+                devicePixelRatio: window.devicePixelRatio,
+                ...(opts.settings || {}),
             },
         })
 
-        // const vertex = this.$refs.vertex.innerText
-        // const fragment = this.$refs.fragment.innerText
-        //
-        // // return shader
-        // this.run(this, vertex, fragment)
-        //
+        this.$emit('instantiated', this.phenom)
     },
 }
 </script>
