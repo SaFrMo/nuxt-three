@@ -14,7 +14,7 @@
                     varying vec4 vColor;
 
                     void main(){
-                        vec3 finalPos = aPosition + aOffset + vec3(0., 0., cos(aOffset.x + uTime) * 0.5 );
+                        vec3 finalPos = aPosition + aOffset + vec3(cos(aOffset.x + uTime) * 0.5) + vec3(0., -0.5, 0.);
                         gl_Position = uProjectionMatrix * uModelMatrix * uViewMatrix * vec4(finalPos, 1.0);
                         gl_PointSize = 2.;
                         vColor = mix(vec4(0., 0., 0., 1.), vec4(1.), 0.35 - finalPos.z);
