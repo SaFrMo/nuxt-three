@@ -1,31 +1,57 @@
 <template>
-
     <main class="three-examples">
+        <h2 class="section-title">Examples</h2>
 
-    <h2 class="section-title">Examples</h2>
+        <p class="info">
+            click <span class="sample-link">…</span> for more info
+        </p>
+        <p class="info">
+            <a href="https://github.com/SaFrMo/nuxt-three"
+                >source for this site</a
+            >
+        </p>
 
-    <p class="info">click <span class="sample-link">…</span> for more info</p>
-    <p class="info"><a href="https://github.com/SaFrMo/nuxt-three">source for this site</a></p>
+        <p class="info">
+            also see
+            <a href="//trois-examples.netlify.app" target="_blank"
+                >some examples</a
+            >
+            written in
+            <a href="//github.com/troisjs/trois" target="_blank">TroisJS</a>
+        </p>
 
-    <ul class="grid">
-        <li class="item" v-for="(item, i) in items" :key="i">
-            <span class="title" v-html="startCase(item)" />
-            <component :is="item" />
-            <nuxt-link class="link" v-if="postExists(item)" :to="`/examples/${ item }`">…</nuxt-link>
-        </li>
-    </ul>
+        <ul class="grid">
+            <li class="item" v-for="(item, i) in items" :key="i">
+                <span class="title" v-html="startCase(item)" />
+                <component :is="item" />
+                <nuxt-link
+                    class="link"
+                    v-if="postExists(item)"
+                    :to="`/examples/${item}`"
+                    >…</nuxt-link
+                >
+            </li>
+        </ul>
 
-    <h2 class="section-title"><a href="https://github.com/vaneenige/phenomenon" target="_blank">Phenomenon.js</a> examples</h2>
-    <ul class="grid">
-        <li class="item" v-for="(item, i) in phenomenonItems" :key="i">
-            <span class="title" v-html="startCase(item)" />
-            <component :is="item" />
-            <nuxt-link class="link" v-if="postExists(item)" :to="`/examples/${ item }`">…</nuxt-link>
-        </li>
-    </ul>
-</main>
-
-
+        <h2 class="section-title">
+            <a href="https://github.com/vaneenige/phenomenon" target="_blank"
+                >Phenomenon.js</a
+            >
+            examples
+        </h2>
+        <ul class="grid">
+            <li class="item" v-for="(item, i) in phenomenonItems" :key="i">
+                <span class="title" v-html="startCase(item)" />
+                <component :is="item" />
+                <nuxt-link
+                    class="link"
+                    v-if="postExists(item)"
+                    :to="`/examples/${item}`"
+                    >…</nuxt-link
+                >
+            </li>
+        </ul>
+    </main>
 </template>
 
 <script>
@@ -50,9 +76,9 @@ export default {
                 'sprite-orbit',
                 'spline-example',
                 'curve-ref',
-                'camera-on-rails'
+                'camera-on-rails',
             ],
-            phenomenonItems: ['turning-helix']
+            phenomenonItems: ['turning-helix'],
         }
     },
     methods: {
@@ -66,14 +92,14 @@ export default {
             }
 
             return true
-        }
-    }
+        },
+    },
 }
 </script>
 
 <style lang="scss">
 .three-examples {
-    font-family: $font-family;
+    // font-family: $font-family;
 
     .link {
         text-align: center;
