@@ -23,7 +23,7 @@
     "phenomenon": "^1.6.0",
     "popmotion": "^8.5.5",
     "sass-loader": "^7.1.0",
-    "three": "^0.99.0",
+    "three": "^0.137.0",
     "three-orbit-controls": "^82.1.0",
     "vue-three-wrap": "^3.2.4"
   },
