@@ -16,7 +16,7 @@
     "html-loader": "^0.5.5",
     "lodash": "^4.17.11",
     "markdown-loader": "^5.0.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^7.0.0",
     "noisejs": "^2.1.0",
     "nuxt": "^2.0.0",
     "nuxt-sass-resources-loader": "^2.0.5",
